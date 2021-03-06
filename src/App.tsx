@@ -1,19 +1,23 @@
-import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { IonApp } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Home from "./pages/Home";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
+      <Switch>
+        <Route exact path="/register">
+          <RegisterPage />
+        </Route>
+        <Route exact path="/login">
+          <LoginPage />
         </Route>
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/login" />
         </Route>
-      </IonRouterOutlet>
+      </Switch>
     </IonReactRouter>
   </IonApp>
 );
