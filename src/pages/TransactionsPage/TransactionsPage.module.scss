@@ -1,0 +1,18 @@
+.ReportWrapper {
+  padding: 1rem;
+
+  .Title {
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .Content {
+    padding: 0;
+  }
+
+  .ReportItem {
+    h4 {
+      font-weight: 600;
+    }
+  }
+}

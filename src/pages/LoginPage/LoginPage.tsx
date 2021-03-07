@@ -20,7 +20,7 @@ const RegisterPage: React.FC<Props> = ({ loginUser, authenticated }) => {
   };
 
   if (authenticated) {
-    <Redirect to="/my/transactions" />;
+    return <Redirect to="/my/transactions" />;
   }
 
   return (
@@ -57,4 +57,4 @@ const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
 });
 
-export default connect(null, { loginUser })(RegisterPage);
+export default connect(mapStateToProps, { loginUser })(RegisterPage);

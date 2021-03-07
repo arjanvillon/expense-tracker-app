@@ -1,5 +1,7 @@
 import axios from "../../config/axiosConfig";
 import {
+  GET_USER_WALLETS,
+  LOAD_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_START,
   LOGIN_USER_SUCCESS,
@@ -68,6 +70,29 @@ export const loginUser = (username: string, password: string) => async (
     })
     .catch((err) => {
       dispatch({ type: LOGIN_USER_FAIL });
+      console.log(err);
+    });
+};
+
+export const loadUser = () => async (dispatch, getState) => {
+  await axios
+    .get("/users", tokenConfig(getState))
+    .then((res) => {
+      console.log(res.data);
+      dispatch({ type: LOAD_USER, payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getWallets = () => async (dispatch, getState) => {
+  await axios
+    .get("/users/wallet", tokenConfig(getState))
+    .then((res) => {
+      dispatch({ type: GET_USER_WALLETS, payload: res.data });
+    })
+    .catch((err) => {
       console.log(err);
     });
 };

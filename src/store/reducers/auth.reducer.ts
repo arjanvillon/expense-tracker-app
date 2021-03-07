@@ -1,4 +1,6 @@
 import {
+  GET_USER_WALLETS,
+  LOAD_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_START,
   LOGIN_USER_SUCCESS,
@@ -12,6 +14,7 @@ const INITIAL_STATE = {
   authenticated: false,
   token: localStorage.getItem("token"),
   user: null,
+  wallets: [],
 };
 
 export default function auth(state = INITIAL_STATE, action) {
@@ -32,11 +35,24 @@ export default function auth(state = INITIAL_STATE, action) {
       };
     case LOGIN_USER_SUCCESS:
     case REGISTER_USER_SUCCESS:
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
         ...payload,
         loading: false,
         authenticated: true,
+      };
+    case LOAD_USER:
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+        authenticated: true,
+      };
+    case GET_USER_WALLETS:
+      return {
+        ...state,
+        wallets: payload,
       };
     default:
       return state;
