@@ -1,0 +1,22 @@
+.Legends {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .Legend {
+    display: flex;
+    align-items: center;
+    flex: 0 0 33%;
+    justify-content: center;
+
+    .Circle {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+    }
+
+    .Label {
+      line-height: 0;
+    }
+  }
+}

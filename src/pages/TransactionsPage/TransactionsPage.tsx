@@ -39,6 +39,16 @@ const TransactionsPage: React.FC<Props> = ({
   getTransactions,
   transactions,
 }) => {
+  const inFlow = getTotalAmount(
+    transactions.filter((transaction) => transaction.category === "Income")
+  );
+  const outFlow = getTotalAmount(
+    transactions.filter(
+      (transaction) =>
+        transaction.category === "Expense" || transaction.category === "Debt"
+    )
+  );
+
   useEffect(() => {
     getTransactions();
   }, []);
@@ -54,13 +64,7 @@ const TransactionsPage: React.FC<Props> = ({
             </IonCol>
             <IonCol size="2">
               <IonText color="success">
-                <span>
-                  {getTotalAmount(
-                    transactions.filter(
-                      (transaction) => transaction.category === "Income"
-                    )
-                  )}
-                </span>
+                <span>{inFlow}</span>
               </IonText>
             </IonCol>
           </IonRow>
@@ -70,15 +74,17 @@ const TransactionsPage: React.FC<Props> = ({
             </IonCol>
             <IonCol size="2">
               <IonText color="danger">
-                <span>
-                  {getTotalAmount(
-                    transactions.filter(
-                      (transaction) =>
-                        transaction.category === "Expense" ||
-                        transaction.category === "Debt"
-                    )
-                  )}
-                </span>
+                <span>{outFlow}</span>
+              </IonText>
+            </IonCol>
+          </IonRow>
+          <IonRow className={styles.ReportItem}>
+            <IonCol size="10">
+              <h4>Money left</h4>
+            </IonCol>
+            <IonCol size="2">
+              <IonText color="primary">
+                <span>{inFlow - outFlow}</span>
               </IonText>
             </IonCol>
           </IonRow>
@@ -91,7 +97,7 @@ const TransactionsPage: React.FC<Props> = ({
 
           return (
             <IonRow
-              key={transaction.date}
+              key={`${transaction.id}`}
               className="ion-justify-content-center ion-align-self-center"
             >
               <IonCol
